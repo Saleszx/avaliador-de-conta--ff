@@ -2,12 +2,12 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Avaliar Conta Free Fire</title>
+<title>Avaliador do Saleszx</title>
 
 <style>
 body {
   font-family: Arial;
-  background: #0f172a;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
   color: white;
   text-align: center;
   padding: 20px;
@@ -16,29 +16,55 @@ body {
 .container {
   background: #1e293b;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 15px;
   max-width: 400px;
   margin: auto;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+h2 {
+  margin-bottom: 5px;
+}
+
+p {
+  opacity: 0.7;
+  font-size: 14px;
 }
 
 input, select, button {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   margin: 8px 0;
-  border-radius: 8px;
+  border-radius: 10px;
   border: none;
+  font-size: 14px;
 }
 
 button {
-  background: #22c55e;
+  background: #3b82f6;
   color: white;
   font-weight: bold;
   cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #2563eb;
 }
 
 .resultado {
   margin-top: 20px;
-  font-size: 20px;
+  font-size: 18px;
+}
+
+.loading {
+  animation: piscar 1s infinite;
+}
+
+@keyframes piscar {
+  0% {opacity: 1;}
+  50% {opacity: 0.3;}
+  100% {opacity: 1;}
 }
 </style>
 </head>
@@ -46,7 +72,8 @@ button {
 <body>
 
 <div class="container">
-<h2>💰 Avaliar Conta Free Fire</h2>
+<h2>🔥 Avaliador do Saleszx</h2>
+<p>@saleszx</p>
 
 <input type="text" id="id" placeholder="Digite seu ID">
 
@@ -79,28 +106,51 @@ button {
 
 <div class="resultado" id="resultado"></div>
 
+<p style="margin-top:20px; font-size:12px;">
+Estimativa não oficial. Não afiliado à Garena.
+</p>
+
 </div>
 
 <script>
 function avaliar() {
   let id = document.getElementById("id").value;
-  
+
   if(id === "") {
     alert("Digite o ID primeiro!");
     return;
   }
 
-  let total = 0;
+  let raridade = parseInt(document.getElementById("raridade").value);
+  let armas = parseInt(document.getElementById("armas").value);
+  let passe = parseInt(document.getElementById("passe").value);
+  let rank = parseInt(document.getElementById("rank").value);
 
-  total += parseInt(document.getElementById("raridade").value);
-  total += parseInt(document.getElementById("armas").value);
-  total += parseInt(document.getElementById("passe").value);
-  total += parseInt(document.getElementById("rank").value);
+  let total = raridade + armas + passe + rank;
+  let valor = total * 2;
 
-  let valor = total * 2; // multiplica pra virar dinheiro
+  let res = document.getElementById("resultado");
 
-  document.getElementById("resultado").innerHTML =
-    "🔍 Analisando ID: " + id + "<br><br>💰 Valor estimado: R$" + valor;
+  res.innerHTML = "<span class='loading'>🔍 Buscando dados...</span>";
+
+  setTimeout(() => {
+    res.innerHTML = "<span class='loading'>📊 Analisando conta...</span>";
+  }, 1000);
+
+  setTimeout(() => {
+    res.innerHTML = "<span class='loading'>💰 Calculando valor...</span>";
+  }, 2000);
+
+  setTimeout(() => {
+    res.innerHTML =
+    "🔍 ID: " + id + "<br><br>" +
+    "📊 Detalhes:<br>" +
+    "- Skins: +" + raridade + "<br>" +
+    "- Armas: +" + armas + "<br>" +
+    "- Passe: +" + passe + "<br>" +
+    "- Rank: +" + rank + "<br><br>" +
+    "💰 Valor estimado: R$" + valor;
+  }, 3000);
 }
 </script>
 
