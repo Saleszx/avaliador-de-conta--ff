@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Avaliar Conta Free Fire</title>
+
+<style>
+body {
+  font-family: Arial;
+  background: #0f172a;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.container {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  margin: auto;
+}
+
+input, select, button {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: none;
+}
+
+button {
+  background: #22c55e;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.resultado {
+  margin-top: 20px;
+  font-size: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>💰 Avaliar Conta Free Fire</h2>
+
+<input type="text" id="id" placeholder="Digite seu ID">
+
+<select id="raridade">
+  <option value="0">Tem skins raras?</option>
+  <option value="100">Sim (+100)</option>
+  <option value="0">Não</option>
+</select>
+
+<select id="armas">
+  <option value="0">Tem armas evoluídas?</option>
+  <option value="150">Sim (+150)</option>
+  <option value="0">Não</option>
+</select>
+
+<select id="passe">
+  <option value="0">Tem passe antigo?</option>
+  <option value="80">Sim (+80)</option>
+  <option value="0">Não</option>
+</select>
+
+<select id="rank">
+  <option value="0">Qual rank?</option>
+  <option value="50">Diamante (+50)</option>
+  <option value="100">Mestre (+100)</option>
+  <option value="200">Desafiante (+200)</option>
+</select>
+
+<button onclick="avaliar()">Avaliar Conta</button>
+
+<div class="resultado" id="resultado"></div>
+
+</div>
+
+<script>
+function avaliar() {
+  let id = document.getElementById("id").value;
+  
+  if(id === "") {
+    alert("Digite o ID primeiro!");
+    return;
+  }
+
+  let total = 0;
+
+  total += parseInt(document.getElementById("raridade").value);
+  total += parseInt(document.getElementById("armas").value);
+  total += parseInt(document.getElementById("passe").value);
+  total += parseInt(document.getElementById("rank").value);
+
+  let valor = total * 2; // multiplica pra virar dinheiro
+
+  document.getElementById("resultado").innerHTML =
+    "🔍 Analisando ID: " + id + "<br><br>💰 Valor estimado: R$" + valor;
+}
+</script>
+
+</body>
+</html>
