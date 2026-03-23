@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Calculadora Temática</title>
+<title>Calc do Saleszx</title>
 
 <style>
 body {
@@ -11,11 +11,39 @@ body {
   transition: 0.3s;
 }
 
+/* TEMAS */
+.dark {
+  background: #0f172a;
+  color: white;
+}
+
+.game {
+  background: black;
+  color: #00ffcc;
+}
+
+.football {
+  background: green;
+  color: white;
+}
+
+.kids {
+  background: #facc15;
+  color: black;
+}
+
+.pink {
+  background: #ffc0cb;
+  color: black;
+}
+
+/* CALCULADORA */
 .calculadora {
   padding: 20px;
   border-radius: 15px;
   width: 300px;
   margin: 50px auto;
+  background: rgba(0,0,0,0.3);
 }
 
 #tela {
@@ -34,67 +62,26 @@ button {
   border-radius: 10px;
   border: none;
   cursor: pointer;
+  font-size: 18px;
 }
 
-/* TEMAS */
-
-.dark {
-  background: #0f172a;
+button:hover {
+  background: #3b82f6;
   color: white;
-}
-
-.dark .calculadora {
-  background: #1e293b;
-}
-
-.game {
-  background: black;
-  color: #00ffcc;
-}
-
-.game .calculadora {
-  background: #020617;
-}
-
-.football {
-  background: green;
-  color: white;
-}
-
-.football .calculadora {
-  background: #14532d;
-}
-
-.kids {
-  background: #facc15;
-  color: black;
-}
-
-.kids .calculadora {
-  background: #fde68a;
-}
-
-.pink {
-  background: #ffc0cb;
-  color: black;
-}
-
-.pink .calculadora {
-  background: #ff99cc;
 }
 </style>
 </head>
 
 <body class="dark">
 
-<h2>🧮 Calculadora Temática</h2>
+<h2>🔥 Calc do Saleszx</h2>
 
 <select onchange="trocarTema(this.value)">
   <option value="dark">🌙 Padrão</option>
   <option value="game">🎮 Gamer</option>
   <option value="football">⚽ Futebol</option>
   <option value="kids">🧸 Kids</option>
-  <option value="pink">💖 Hello Kitty</option>
+  <option value="pink">💖 Rosa</option>
 </select>
 
 <div class="calculadora">
@@ -133,4 +120,9 @@ button {
 
 </div>
 
-<script
+<script>
+function add(valor) {
+  document.getElementById("tela").value += valor;
+}
+
+function calcular()
