@@ -2,157 +2,135 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Avaliador do Saleszx</title>
+<title>Calculadora Temática</title>
 
 <style>
 body {
   font-family: Arial;
-  background: linear-gradient(135deg, #0f172a, #1e293b);
-  color: white;
   text-align: center;
-  padding: 20px;
-}
-
-.container {
-  background: #1e293b;
-  padding: 20px;
-  border-radius: 15px;
-  max-width: 400px;
-  margin: auto;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
-}
-
-h2 {
-  margin-bottom: 5px;
-}
-
-p {
-  opacity: 0.7;
-  font-size: 14px;
-}
-
-input, select, button {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 10px;
-  border: none;
-  font-size: 14px;
-}
-
-button {
-  background: #3b82f6;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
   transition: 0.3s;
 }
 
-button:hover {
-  background: #2563eb;
+.calculadora {
+  padding: 20px;
+  border-radius: 15px;
+  width: 300px;
+  margin: 50px auto;
 }
 
-.resultado {
-  margin-top: 20px;
-  font-size: 18px;
+#tela {
+  width: 100%;
+  padding: 15px;
+  font-size: 20px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: none;
 }
 
-.loading {
-  animation: piscar 1s infinite;
+button {
+  width: 60px;
+  height: 60px;
+  margin: 5px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
 }
 
-@keyframes piscar {
-  0% {opacity: 1;}
-  50% {opacity: 0.3;}
-  100% {opacity: 1;}
+/* TEMAS */
+
+.dark {
+  background: #0f172a;
+  color: white;
+}
+
+.dark .calculadora {
+  background: #1e293b;
+}
+
+.game {
+  background: black;
+  color: #00ffcc;
+}
+
+.game .calculadora {
+  background: #020617;
+}
+
+.football {
+  background: green;
+  color: white;
+}
+
+.football .calculadora {
+  background: #14532d;
+}
+
+.kids {
+  background: #facc15;
+  color: black;
+}
+
+.kids .calculadora {
+  background: #fde68a;
+}
+
+.pink {
+  background: #ffc0cb;
+  color: black;
+}
+
+.pink .calculadora {
+  background: #ff99cc;
 }
 </style>
 </head>
 
-<body>
+<body class="dark">
 
-<div class="container">
-<h2>🔥 Avaliador do Saleszx</h2>
-<p>@saleszx</p>
+<h2>🧮 Calculadora Temática</h2>
 
-<input type="text" id="id" placeholder="Digite seu ID">
-
-<select id="raridade">
-  <option value="0">Tem skins raras?</option>
-  <option value="100">Sim (+100)</option>
-  <option value="0">Não</option>
+<select onchange="trocarTema(this.value)">
+  <option value="dark">🌙 Padrão</option>
+  <option value="game">🎮 Gamer</option>
+  <option value="football">⚽ Futebol</option>
+  <option value="kids">🧸 Kids</option>
+  <option value="pink">💖 Hello Kitty</option>
 </select>
 
-<select id="armas">
-  <option value="0">Tem armas evoluídas?</option>
-  <option value="150">Sim (+150)</option>
-  <option value="0">Não</option>
-</select>
+<div class="calculadora">
 
-<select id="passe">
-  <option value="0">Tem passe antigo?</option>
-  <option value="80">Sim (+80)</option>
-  <option value="0">Não</option>
-</select>
+<input type="text" id="tela" disabled>
 
-<select id="rank">
-  <option value="0">Qual rank?</option>
-  <option value="50">Diamante (+50)</option>
-  <option value="100">Mestre (+100)</option>
-  <option value="200">Desafiante (+200)</option>
-</select>
+<div>
+<button onclick="add('7')">7</button>
+<button onclick="add('8')">8</button>
+<button onclick="add('9')">9</button>
+<button onclick="add('/')">÷</button>
+</div>
 
-<button onclick="avaliar()">Avaliar Conta</button>
+<div>
+<button onclick="add('4')">4</button>
+<button onclick="add('5')">5</button>
+<button onclick="add('6')">6</button>
+<button onclick="add('*')">×</button>
+</div>
 
-<div class="resultado" id="resultado"></div>
+<div>
+<button onclick="add('1')">1</button>
+<button onclick="add('2')">2</button>
+<button onclick="add('3')">3</button>
+<button onclick="add('-')">−</button>
+</div>
 
-<p style="margin-top:20px; font-size:12px;">
-Estimativa não oficial. Não afiliado à Garena.
-</p>
+<div>
+<button onclick="add('0')">0</button>
+<button onclick="add('.')">.</button>
+<button onclick="calcular()">=</button>
+<button onclick="add('+')">+</button>
+</div>
+
+<button onclick="limpar()" style="width:100%;">Limpar</button>
 
 </div>
 
-<script>
-function avaliar() {
-  let id = document.getElementById("id").value;
-
-  if(id === "") {
-    alert("Digite o ID primeiro!");
-    return;
-  }
-
-  let raridade = parseInt(document.getElementById("raridade").value);
-  let armas = parseInt(document.getElementById("armas").value);
-  let passe = parseInt(document.getElementById("passe").value);
-  let rank = parseInt(document.getElementById("rank").value);
-
-  let total = raridade + armas + passe + rank;
-  let valor = total * 2;
-
-  let res = document.getElementById("resultado");
-
-  res.innerHTML = "<span class='loading'>🔍 Buscando dados...</span>";
-
-  setTimeout(() => {
-    res.innerHTML = "<span class='loading'>📊 Analisando conta...</span>";
-  }, 1000);
-
-  setTimeout(() => {
-    res.innerHTML = "<span class='loading'>💰 Calculando valor...</span>";
-  }, 2000);
-
-  setTimeout(() => {
-    res.innerHTML =
-    "🔍 ID: " + id + "<br><br>" +
-    "📊 Detalhes:<br>" +
-    "- Skins: +" + raridade + "<br>" +
-    "- Armas: +" + armas + "<br>" +
-    "- Passe: +" + passe + "<br>" +
-    "- Rank: +" + rank + "<br><br>" +
-    "💰 Valor estimado: R$" + valor;
-  }, 3000);
-}
-</script>
-
-</body>
-</html>
+<script
